@@ -17,7 +17,12 @@ module Rxdata
       paths.each_with_index do |path, i|
         progress.increment
         name = path.basename(Rxdata::EXT)
+		# Ignore PkmnAnimations and TilesetsTemp (files from pokemon essentials that break this program)
+		if name.to_s.eql?("PkmnAnimations") || name.to_s.eql?("TilesetsTemp")
+		  next
+		end
         rxdata = Marshal.load(path.read(mode: 'rb'))
+		
         case name.to_s
         when 'Scripts'
           transform = ScriptTransform.apply(rxdata)
