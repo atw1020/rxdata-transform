@@ -19,11 +19,7 @@ command = ARGV.shift
 case command
 when 'import'
   path = ARGV.shift
-  if path
-    path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
-    importer = Rxdata::Importer.new(path)
-    importer.import
-  end
+  
 when 'export'
   path = ARGV.shift
   if path
